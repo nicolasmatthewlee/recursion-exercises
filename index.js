@@ -1,3 +1,5 @@
+// fibonacci recursion
+
 function fibs(n) {
   if (n < 1) return;
   if (n < 2) return [0];
@@ -22,3 +24,29 @@ function fibsRec(n) {
 }
 
 console.log(fibsRec(8));
+
+// merge sort
+
+function mergeSort(nums) {
+  if (nums.length < 2) return nums;
+
+  let sortedLeft = mergeSort(nums.slice(0, nums.length / 2));
+  let sortedRight = mergeSort(nums.slice(nums.length / 2));
+
+  // merge
+  let merge = [];
+  while (sortedLeft.length > 0 && sortedRight.length > 0) {
+    if (sortedLeft[0] < sortedRight[0]) {
+      merge.push(sortedLeft.shift());
+    } else {
+      merge.push(sortedRight.shift());
+    }
+  }
+  // add any leftover elements
+  while (sortedLeft.length > 0) merge.push(sortedLeft.shift());
+  while (sortedRight.length > 0) merge.push(sortedRight.shift());
+
+  return merge;
+}
+
+console.log(mergeSort([5, 6, 1, 7, 8, 3, 4, 2, 8, 5, 9, 4, 2]));
